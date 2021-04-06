@@ -38,7 +38,7 @@ You can run tests on the console by using
 dotnet test 
 ```
 
-If you want to run tests within VSCode, you can install the [].NET Core Test Explorer Extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.dotnet-test-explorer). In this case make sure, you set the Propery "Test Project Path" in the extension setting to this value:
+If you want to run tests within VSCode, you can install the [.NET Core Test Explorer Extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.dotnet-test-explorer). In this case make sure, you set the Propery "Test Project Path" in the extension setting to this value:
 ```bash
 **/*[Test|ATDD]*/*.csproj
 ```
