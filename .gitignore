@@ -289,3 +289,4 @@ __pycache__/
 
 # SonarQube
 .sonarqube
+/Battleship.GameController.ATDD/SpecFlow/userid
