@@ -24,7 +24,7 @@ You can easily run the game within a docker container.
 Change into the Battleship folder
 
 ```bash
-docker run -it -v ${PWD}:/battleship mcr.microsoft.com/dotnet/core/sdk:3.1 bash
+docker run -it -v ${PWD}:/battleship mcr.microsoft.com/dotnet/sdk:5.0 bash
 ```
 
 This starts a new container and maps your current folder on your host machine as the folder battleship in your container and opens a bash console. In bash then change to the folder battleship/Battleship.Ascii and run
