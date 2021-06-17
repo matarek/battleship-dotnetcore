@@ -13,8 +13,8 @@ unit test:
 build: 
   stage: build
   script: 
-    - dotnet build --output ./build/
-    # - dotnet publish -r win10-x64 --output ./build/ => Uncomment and adapt if you want to create a platform-dependent build for your operating system
+    - dotnet build --output ./build/ ./Battleship.Ascii/Battleship.Ascii.csproj
+    # - dotnet publish -r win10-x64 --output ./build/ ./Battleship.Ascii/Battleship.Ascii.csproj => Uncomment and adapt if you want to create a platform-dependent build for your operating system
   artifacts:
     paths:
       - ./build/
