@@ -20,19 +20,21 @@ steps:
     command: restore
     projects: '**/*.sln'
 
-#- task: DotNetCoreCLI@2
-#  displayName: Build
-#  inputs:
-#    projects: '**/*.sln'
-#    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-
 - task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/Battleship.Ascii.csproj'
-    arguments: '--configuration $(BuildConfiguration) -r win-x64 --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: false
+    projects: '**/*.sln'
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+
+# You can build a platform based executeable with the following task instead of the above one
+# Make sure you set the right platform with the -r parameter
+#- task: DotNetCoreCLI@2
+#  inputs:
+#    command: 'publish'
+#    publishWebProjects: false
+#    projects: '**/Battleship.Ascii.csproj'
+#    arguments: '--configuration $(BuildConfiguration) -r win-x64 --output $(build.artifactstagingdirectory)'
+#    zipAfterPublish: false
 
 - task: DotNetCoreCLI@2
   displayName: Test
