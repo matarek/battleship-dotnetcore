@@ -20,11 +20,18 @@ steps:
     command: restore
     projects: '**/*.sln'
 
+#- task: DotNetCoreCLI@2
+#  displayName: Build
+#  inputs:
+#    projects: '**/*.sln'
+#    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+
 - task: DotNetCoreCLI@2
-  displayName: Build
   inputs:
-    projects: '**/*.sln'
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--configuration $(BuildConfiguration) -r win-x64 --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: false
 
 - task: DotNetCoreCLI@2
   displayName: Test
