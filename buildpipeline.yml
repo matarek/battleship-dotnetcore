@@ -29,6 +29,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
+    publishWebProjects: false
     projects: '**/Battleship.Ascii.csproj'
     arguments: '--configuration $(BuildConfiguration) -r win-x64 --output $(build.artifactstagingdirectory)'
     zipAfterPublish: false
