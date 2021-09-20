@@ -24,7 +24,7 @@ sonar:
   before_script: 
   - dotnet tool install --global dotnet-sonarscanner
   - export PATH="$PATH:/root/.dotnet/tools"
-  - mkdir /usr/share/man/man1/
+  - mkdir -p /usr/share/man/man1/
   - apt-get update && apt-get install -y default-jdk
   script:
   - dotnet sonarscanner begin /k:"$$$SONAR_PROJECT_KEY$$$" /d:sonar.host.url=$$$SONAR_URL$$$
