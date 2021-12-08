@@ -40,55 +40,56 @@ namespace Battleship.Ascii
             StartGame();
         }
 
-      private static void StartGame()
-      {
-         var miss_color = ConsoleColor.Blue;
-         var miss_b_color = ConsoleColor.White;
-         var hit_color = ConsoleColor.Red;
-         var hit_b_color = ConsoleColor.White;
-         var message_color = ConsoleColor.Gray;
-         var message_b_color = ConsoleColor.Black;
+        private static void StartGame()
+        {
+            var miss_color = ConsoleColor.Blue;
+            var miss_b_color = ConsoleColor.White;
+            var hit_color = ConsoleColor.Red;
+            var hit_b_color = ConsoleColor.White;
+            var message_color = ConsoleColor.Gray;
+            var message_b_color = ConsoleColor.Black;
 
-         Console.ForegroundColor = message_color;
-         Console.BackgroundColor = message_b_color;
-         Console.Clear();
-         Console.WriteLine("                  __");
-         Console.WriteLine(@"                 /  \");
-         Console.WriteLine("           .-.  |    |");
-         Console.WriteLine(@"   *    _.-'  \  \__/");
-         Console.WriteLine(@"    \.-'       \");
-         Console.WriteLine("   /          _/");
-         Console.WriteLine(@"  |      _  /""");
-         Console.WriteLine(@"  |     /_\'");
-         Console.WriteLine(@"   \    \_/");
-         Console.WriteLine(@"    """"""""");
-
-         do
-         {
             Console.ForegroundColor = message_color;
             Console.BackgroundColor = message_b_color;
-            Console.WriteLine();
-            Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - START -=x=--=x=--=x=-");
-            Console.WriteLine();
-            Console.WriteLine("Enter coordinates for your shot :");
-            var position = ParsePosition(Console.ReadLine());
-            var hit = GameController.CheckIsHit(enemyFleet, position);
-            var isHit = hit != null;
-            if (isHit)
+            Console.Clear();
+            Console.WriteLine("                  __");
+            Console.WriteLine(@"                 /  \");
+            Console.WriteLine("           .-.  |    |");
+            Console.WriteLine(@"   *    _.-'  \  \__/");
+            Console.WriteLine(@"    \.-'       \");
+            Console.WriteLine("   /          _/");
+            Console.WriteLine(@"  |      _  /""");
+            Console.WriteLine(@"  |     /_\'");
+            Console.WriteLine(@"   \    \_/");
+            Console.WriteLine(@"    """"""""");
+
+            do
             {
-               Console.ForegroundColor = hit_color;
-               Console.BackgroundColor = hit_b_color;
-               Console.Beep();
-               Console.WriteLine(@"                \         .  ./");
-               Console.WriteLine(@"              \      .:"";'.:..""   /");
-               Console.WriteLine(@"                  (M^^.^~~:.'"").");
-               Console.WriteLine(@"            -   (/  .    . . \ \)  -");
-               Console.WriteLine(@"               ((| :. ~ ^  :. .|))");
-               Console.WriteLine(@"            -   (\- |  \ /  |  /)  -");
-               Console.WriteLine(@"                 -\  \     /  /-");
-               Console.WriteLine(@"                   \  \   /  /");
-               
-               Console.WriteLine("Yeah ! Nice hit !");
+                Console.ForegroundColor = message_color;
+                Console.BackgroundColor = message_b_color;
+                Console.WriteLine();
+                Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - START -=x=--=x=--=x=-");
+                Console.WriteLine();
+                Console.WriteLine($"Enemy still has: {string.Join(", ", GameController.GetNotSunk(enemyFleet))}");
+                Console.WriteLine("Enter coordinates for your shot :");
+                var position = ParsePosition(Console.ReadLine());
+                var hit = GameController.CheckIsHit(enemyFleet, position);
+                var isHit = hit != null;
+                if (isHit)
+                {
+                    Console.ForegroundColor = hit_color;
+                    Console.BackgroundColor = hit_b_color;
+                    Console.Beep();
+                    Console.WriteLine(@"                \         .  ./");
+                    Console.WriteLine(@"              \      .:"";'.:..""   /");
+                    Console.WriteLine(@"                  (M^^.^~~:.'"").");
+                    Console.WriteLine(@"            -   (/  .    . . \ \)  -");
+                    Console.WriteLine(@"               ((| :. ~ ^  :. .|))");
+                    Console.WriteLine(@"            -   (\- |  \ /  |  /)  -");
+                    Console.WriteLine(@"                 -\  \     /  /-");
+                    Console.WriteLine(@"                   \  \   /  /");
+
+                    Console.WriteLine("Yeah ! Nice hit !");
                     if (hit.IsSunk)
                     {
                         Console.WriteLine($"You've sunk the {hit.Name}!");
@@ -98,32 +99,35 @@ namespace Battleship.Ascii
                             break;
                         }
                     }
-            else {
-               Console.ForegroundColor = miss_color;
-               Console.BackgroundColor = miss_b_color;
-               Console.WriteLine("Miss");
-            }
-            Console.ForegroundColor = message_color;
-            Console.BackgroundColor = message_b_color;
-            Console.WriteLine();
-            Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - START -=x=--=x=--=x=-");
+                }
+                else
+                {
+                    Console.ForegroundColor = miss_color;
+                    Console.BackgroundColor = miss_b_color;
+                    Console.WriteLine("Miss");
+                }
+                Console.ForegroundColor = message_color;
+                Console.BackgroundColor = message_b_color;
+                Console.WriteLine();
+                Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
+                System.Threading.Thread.Sleep(1500);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - START -=x=--=x=--=x=-");
 
-            position = GetRandomPosition();
-                    hit = GameController.CheckIsHit(myFleet, position);
-                    isHit = hit != null;
-                    Console.WriteLine();
-            Console.WriteLine("Computer shot in {0}{1}", position.Column, position.Row);
-            if (isHit)
-            {
-               Console.ForegroundColor = hit_color;
-               Console.BackgroundColor = hit_b_color;
-               Console.Beep();
+                position = GetRandomPosition();
+                hit = GameController.CheckIsHit(myFleet, position);
+                isHit = hit != null;
+                Console.WriteLine();
+                Console.WriteLine("Computer shot in {0}{1}", position.Column, position.Row);
+                if (isHit)
+                {
+                    Console.ForegroundColor = hit_color;
+                    Console.BackgroundColor = hit_b_color;
+                    Console.Beep();
 
                     Console.WriteLine(@"                \         .  ./");
                     Console.WriteLine(@"              \      .:"";'.:..""   /");
@@ -134,39 +138,43 @@ namespace Battleship.Ascii
                     Console.WriteLine(@"                 -\  \     /  /-");
                     Console.WriteLine(@"                   \  \   /  /");
 
-               Console.WriteLine("Too bad! Enemy hits Your ship !");
-                        if (hit.IsSunk)
+                    Console.WriteLine("Too bad! Enemy hits Your ship !");
+                    if (hit.IsSunk)
+                    {
+                        Console.WriteLine($"Computer sunk your {hit.Name}!");
+                        Console.WriteLine($"You still have: {string.Join(", ", GameController.GetNotSunk(myFleet))}");
+                        if (!GameController.FleetDestroyed(myFleet))
                         {
-                            Console.WriteLine($"Computer sunk your {hit.Name}!");
-                            if (!GameController.FleetDestroyed(myFleet))
-                            {
-                                Console.WriteLine($"You still have: {string.Join(", ", GameController.GetNotSunk(myFleet))}");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You've lost the game!");
-                                break;
-                            }
-
+                            Console.WriteLine($"You still have: {string.Join(", ", GameController.GetNotSunk(myFleet))}");
                         }
-            else {
-               Console.ForegroundColor = miss_color;
-               Console.BackgroundColor = miss_b_color;
-               Console.WriteLine("Good for You! Enemy missed");
+                        else
+                        {
+                            Console.WriteLine("You've lost the game!");
+                            break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    Console.ForegroundColor = miss_color;
+                    Console.BackgroundColor = miss_b_color;
+                    Console.WriteLine("Good for You! Enemy missed");
+                }
+                Console.ForegroundColor = message_color;
+                Console.BackgroundColor = message_b_color;
+                Console.WriteLine();
+                Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+
             }
-            Console.ForegroundColor = message_color;
-            Console.BackgroundColor = message_b_color;
-            Console.WriteLine();
-            Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-         }
-         while (true);
-                    Console.ReadLine();
-      }
+            while (true);
+            Console.ReadLine();
+        }
 
         public static Position ParsePosition(string input)
         {
@@ -216,6 +224,7 @@ namespace Battleship.Ascii
                 }
             }
         }
+
 
         private static void InitializeEnemyFleet()
         {
