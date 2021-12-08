@@ -43,6 +43,8 @@
         /// </summary>
         public int Row { get; set; }
 
+        public bool Hit { get; set; }
+
         #endregion
 
         #region Public Methods and Operators

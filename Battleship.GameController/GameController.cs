@@ -29,7 +29,7 @@ namespace Battleship.GameController
         ///     or
         ///     shot
         /// </exception>
-        public static bool CheckIsHit(IEnumerable<Ship> ships, Position shot)
+        public static Ship CheckIsHit(IEnumerable<Ship> ships, Position shot)
         {
             if (ships == null)
             {
@@ -47,12 +47,13 @@ namespace Battleship.GameController
                 {
                     if (position.Equals(shot))
                     {
-                        return true;
+                        position.Hit = true;
+                        return ship;
                     }
                 }
             }
 
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -94,6 +95,16 @@ namespace Battleship.GameController
             var number = random.Next(size);
             var position = new Position(letter, number);
             return position;
+        }
+
+        public static IEnumerable<string> GetNotSunk(IEnumerable<Ship> fleet)
+        {
+            return fleet.Where(s => !s.IsSunk).OrderByDescending(s => s.Size).Select(s => s.Name);
+        }
+
+        public static bool FleetDestroyed(IEnumerable<Ship> fleet)
+        {
+            return fleet.All(s => s.IsSunk);
         }
      }
 }

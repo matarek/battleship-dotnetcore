@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Battleship.GameController.Contracts
@@ -46,6 +47,11 @@ namespace Battleship.GameController.Contracts
         /// Gets or sets the size.
         /// </summary>
         public int Size { get; set; }
+
+        public bool IsSunk
+        {
+            get { return Positions.All(p => p.Hit); }
+        }
 
         #endregion
 
