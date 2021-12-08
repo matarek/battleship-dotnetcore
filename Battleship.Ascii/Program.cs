@@ -57,7 +57,8 @@ namespace Battleship.Ascii
          do
          {
             Console.WriteLine();
-            Console.WriteLine("Player, it's your turn");
+            Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - START -=x=--=x=--=x=-");
+            Console.WriteLine();
             Console.WriteLine("Enter coordinates for your shot :");
             var position = ParsePosition(Console.ReadLine());
             var isHit = GameController.CheckIsHit(enemyFleet, position);
@@ -77,6 +78,15 @@ namespace Battleship.Ascii
 
             Console.WriteLine(isHit ? "Yeah ! Nice hit !" : "Miss");
 
+            Console.WriteLine();
+            Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - START -=x=--=x=--=x=-");
+
             position = GetRandomPosition();
             isHit = GameController.CheckIsHit(myFleet, position);
             Console.WriteLine();
@@ -95,6 +105,9 @@ namespace Battleship.Ascii
                Console.WriteLine(@"                   \  \   /  /");
 
             }
+            Console.WriteLine();
+            Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
+            Console.WriteLine();
          }
          while (true);
       }
