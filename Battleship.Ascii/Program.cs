@@ -119,10 +119,6 @@ namespace Battleship.Ascii
                 Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
                 System.Threading.Thread.Sleep(1500);
                 Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - START -=x=--=x=--=x=-");
 
                 position = GetRandomPosition();
@@ -178,12 +174,7 @@ namespace Battleship.Ascii
                     Console.WriteLine("Good for You! Enemy missed");
                 }
                 Console.ForegroundColor = message_color;
-                Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
                 Console.WriteLine();
 
             }
