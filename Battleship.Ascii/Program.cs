@@ -43,14 +43,11 @@ namespace Battleship.Ascii
         private static void StartGame()
         {
             var miss_color = ConsoleColor.Blue;
-            var miss_b_color = ConsoleColor.White;
             var hit_color = ConsoleColor.Red;
-            var hit_b_color = ConsoleColor.White;
             var message_color = ConsoleColor.Gray;
-            var message_b_color = ConsoleColor.Black;
+            var info_color = ConsoleColor.Green;
 
             Console.ForegroundColor = message_color;
-            Console.BackgroundColor = message_b_color;
             Console.Clear();
             Console.WriteLine("                  __");
             Console.WriteLine(@"                 /  \");
@@ -66,7 +63,6 @@ namespace Battleship.Ascii
             do
             {
                 Console.ForegroundColor = message_color;
-                Console.BackgroundColor = message_b_color;
                 Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - START -=x=--=x=--=x=-");
                 Console.WriteLine();
@@ -78,7 +74,6 @@ namespace Battleship.Ascii
                 if (isHit)
                 {
                     Console.ForegroundColor = hit_color;
-                    Console.BackgroundColor = hit_b_color;
                     Console.Beep();
                     Console.WriteLine(@"                \         .  ./");
                     Console.WriteLine(@"              \      .:"";'.:..""   /");
@@ -92,22 +87,22 @@ namespace Battleship.Ascii
                     Console.WriteLine("Yeah ! Nice hit !");
                     if (hit.IsSunk)
                     {
+                        Console.ForegroundColor = info_color;
                         Console.WriteLine($"You've sunk the {hit.Name}!");
                         if (GameController.FleetDestroyed(enemyFleet))
                         {
                             Console.WriteLine("You've won!");
                             break;
                         }
+                        Console.ForegroundColor = message_color;
                     }
                 }
                 else
                 {
                     Console.ForegroundColor = miss_color;
-                    Console.BackgroundColor = miss_b_color;
                     Console.WriteLine("Miss");
                 }
                 Console.ForegroundColor = message_color;
-                Console.BackgroundColor = message_b_color;
                 Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
                 System.Threading.Thread.Sleep(1500);
@@ -126,7 +121,6 @@ namespace Battleship.Ascii
                 if (isHit)
                 {
                     Console.ForegroundColor = hit_color;
-                    Console.BackgroundColor = hit_b_color;
                     Console.Beep();
 
                     Console.WriteLine(@"                \         .  ./");
@@ -141,6 +135,7 @@ namespace Battleship.Ascii
                     Console.WriteLine("Too bad! Enemy hits Your ship !");
                     if (hit.IsSunk)
                     {
+                        Console.ForegroundColor = info_color;
                         Console.WriteLine($"Computer sunk your {hit.Name}!");
                         Console.WriteLine($"You still have: {string.Join(", ", GameController.GetNotSunk(myFleet))}");
                         if (!GameController.FleetDestroyed(myFleet))
@@ -152,17 +147,16 @@ namespace Battleship.Ascii
                             Console.WriteLine("You've lost the game!");
                             break;
                         }
+                        Console.ForegroundColor = message_color;
                     }
 
                 }
                 else
                 {
                     Console.ForegroundColor = miss_color;
-                    Console.BackgroundColor = miss_b_color;
                     Console.WriteLine("Good for You! Enemy missed");
                 }
                 Console.ForegroundColor = message_color;
-                Console.BackgroundColor = message_b_color;
                 Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
                 Console.WriteLine();
@@ -225,32 +219,10 @@ namespace Battleship.Ascii
             }
         }
 
-
         private static void InitializeEnemyFleet()
         {
-            enemyFleet = GameController.InitializeShips().ToList();
-
-            enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 4 });
-            enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 5 });
-            enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 6 });
-            enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 7 });
-            enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 });
-
-            enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 6 });
-            enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 7 });
-            enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 8 });
-            enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 9 });
-
-            enemyFleet[2].Positions.Add(new Position { Column = Letters.A, Row = 3 });
-            enemyFleet[2].Positions.Add(new Position { Column = Letters.B, Row = 3 });
-            enemyFleet[2].Positions.Add(new Position { Column = Letters.C, Row = 3 });
-
-            enemyFleet[3].Positions.Add(new Position { Column = Letters.F, Row = 8 });
-            enemyFleet[3].Positions.Add(new Position { Column = Letters.G, Row = 8 });
-            enemyFleet[3].Positions.Add(new Position { Column = Letters.H, Row = 8 });
-
-            enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 5 });
-            enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 6 });
+            enemyFleet = EnemyFleet.GetFleet().ToList();
         }
+
     }
 }
