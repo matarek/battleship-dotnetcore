@@ -17,7 +17,6 @@ namespace Battleship.Ascii
         static void Main()
         {
             Console.Title = "Battleship";
-            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
 
             Console.WriteLine("                                     |__");
