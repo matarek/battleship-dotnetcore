@@ -67,17 +67,20 @@ namespace Battleship.Ascii
                 Console.WriteLine();
                 Console.ForegroundColor = info_color;
                 Console.WriteLine($"Enemy still has: {string.Join(", ", GameController.GetNotSunk(enemyFleet))}");
-                Console.WriteLine("Enter coordinates for your shot :");
                 Console.ForegroundColor = message_color;
+                Console.WriteLine("Enter coordinates for your shot :");
                 var position = ParsePosition(Console.ReadLine());
                 var hit = GameController.CheckIsHit(enemyFleet, position);
                 var isHit = hit != null;
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine("...");
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine("..");
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                Console.WriteLine();
+                Console.WriteLine();
+                System.Threading.Thread.Sleep(300);
                 if (isHit)
                 {
                     Console.ForegroundColor = hit_color;
@@ -98,9 +101,9 @@ namespace Battleship.Ascii
                         Console.WriteLine($"You've sunk the {hit.Name}!");
                         if (GameController.FleetDestroyed(enemyFleet))
                         {
-                            System.Threading.Thread.Sleep(500);
+                            System.Threading.Thread.Sleep(300);
                             Console.WriteLine("You've won!");
-                            System.Threading.Thread.Sleep(500);
+                            System.Threading.Thread.Sleep(300);
                             Console.WriteLine(" ");
                             Console.ForegroundColor = message_color;
                             Console.WriteLine("Click any button to close game.");
@@ -117,7 +120,7 @@ namespace Battleship.Ascii
                 Console.ForegroundColor = message_color;
                 Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- PLAYER TURN - END -=x=--=x=--=x=-");
-                System.Threading.Thread.Sleep(1500);
+                System.Threading.Thread.Sleep(1300);
                 Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - START -=x=--=x=--=x=-");
 
@@ -126,12 +129,15 @@ namespace Battleship.Ascii
                 isHit = hit != null;
                 Console.WriteLine();
                 Console.WriteLine("Computer shot in {0}{1}", position.Column, position.Row);
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine("...");
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine("..");
-                System.Threading.Thread.Sleep(500);
-                Console.WriteLine(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                System.Threading.Thread.Sleep(300);
+                Console.Write(".");
+                Console.WriteLine();
+                Console.WriteLine();
+                System.Threading.Thread.Sleep(300);
                 if (isHit)
                 {
                     Console.ForegroundColor = hit_color;
@@ -158,7 +164,7 @@ namespace Battleship.Ascii
                         else
                         {
                             Console.WriteLine("You've lost the game!");
-                            System.Threading.Thread.Sleep(500);
+                            System.Threading.Thread.Sleep(300);
                             Console.WriteLine(" ");
                             Console.ForegroundColor = message_color;
                             Console.WriteLine("Click any button to close game.");
@@ -175,7 +181,6 @@ namespace Battleship.Ascii
                 }
                 Console.ForegroundColor = message_color;
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
-                Console.WriteLine();
 
             }
             while (true);
