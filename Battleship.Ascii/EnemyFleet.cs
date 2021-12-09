@@ -111,7 +111,7 @@ namespace Battleship.Ascii
                     enemyFleet[4].Positions.Add(new Position { Column = Letters.E, Row = 3 });
                     enemyFleet[4].Positions.Add(new Position { Column = Letters.F, Row = 3 });
                 break;
-                case 4:
+                default:
                     enemyFleet[0].Positions.Add(new Position { Column = Letters.C, Row = 7 });
                     enemyFleet[0].Positions.Add(new Position { Column = Letters.D, Row = 7 });
                     enemyFleet[0].Positions.Add(new Position { Column = Letters.E, Row = 7 });
@@ -133,7 +133,8 @@ namespace Battleship.Ascii
 
                     enemyFleet[4].Positions.Add(new Position { Column = Letters.F, Row = 3 });
                     enemyFleet[4].Positions.Add(new Position { Column = Letters.G, Row = 3 });
-                break;
+                    break;
+
             }
             return enemyFleet;
         }
