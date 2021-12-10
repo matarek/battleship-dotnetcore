@@ -217,22 +217,22 @@ namespace Battleship.Ascii
             myFleet = GameController.InitializeShips().ToList();
 
             Console.WriteLine("Please position your fleet (Game board size is from A to H and 1 to 8) :");
+            Console.WriteLine("Format for position is LN-D, where: L - letter, N - number, D - direction indication {U, D, L, R}");
 
             foreach (var ship in myFleet)
             {
                 Console.WriteLine();
-                Console.WriteLine("Please enter the positions for the {0} (size: {1})", ship.Name, ship.Size);
-                for (var i = 1; i <= ship.Size; i++)
+                Console.WriteLine("Please enter the start point and direction for the {0} (size: {1})", ship.Name, ship.Size);
+                var p = Console.ReadLine();
+                List<Position> positions;
+                var validPostion = ShipPositionValidator.ValidatePosition(p, ship.Size, out positions);
+                while (!validPostion)
                 {
-                    Console.WriteLine("Enter position {0} of {1} (i.e A3):", i, ship.Size);
-
-                    var p = ship.AddPosition(Console.ReadLine());
-                    while (!p)
-                    {
-                        Console.WriteLine("Invalid input, please try again");
-                        p = ship.AddPosition(Console.ReadLine());
-                    }
+                    p = Console.ReadLine();
+                    validPostion = ShipPositionValidator.ValidatePosition(p, ship.Size, out positions);
                 }
+                ship.Positions = positions;
+
             }
         }
 
