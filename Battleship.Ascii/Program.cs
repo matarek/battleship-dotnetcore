@@ -68,8 +68,18 @@ namespace Battleship.Ascii
                 Console.ForegroundColor = info_color;
                 Console.WriteLine($"Enemy still has: {string.Join(", ", GameController.GetNotSunk(enemyFleet))}");
                 Console.ForegroundColor = message_color;
-                Console.WriteLine("Enter coordinates for your shot :");
-                var position = ParsePosition(Console.ReadLine());
+                
+                Position position = null;
+                do
+                {
+                    Console.WriteLine("Enter coordinates for your shot :");
+                    position = ParsePosition(Console.ReadLine());
+                    if(position == null)
+                    {
+                        Console.WriteLine("Wrong input! Try again.");
+                    }
+                }
+                while(position == null);
                 var hit = GameController.CheckIsHit(enemyFleet, position);
                 var isHit = hit != null;
                 System.Threading.Thread.Sleep(300);
@@ -167,7 +177,8 @@ namespace Battleship.Ascii
                             System.Threading.Thread.Sleep(300);
                             Console.WriteLine(" ");
                             Console.ForegroundColor = message_color;
-                            Console.WriteLine("Click any button to close game.");
+                            Console.WriteLine("Thank you for playing!!!");
+                            Console.WriteLine("Use \"x\" to close game.");
                             break;
                         }
                         Console.ForegroundColor = message_color;
@@ -180,6 +191,7 @@ namespace Battleship.Ascii
                     Console.WriteLine("Good for You! Enemy missed");
                 }
                 Console.ForegroundColor = message_color;
+                Console.WriteLine();
                 Console.WriteLine("-=x=--=x=--=x=- ENEMY TURN - END -=x=--=x=--=x=-");
 
             }
@@ -189,9 +201,17 @@ namespace Battleship.Ascii
 
         public static Position ParsePosition(string input)
         {
-            var letter = (Letters)Enum.Parse(typeof(Letters), input.ToUpper().Substring(0, 1));
-            var number = int.Parse(input.Substring(1, 1));
-            return new Position(letter, number);
+            try
+            {
+                var letter = (Letters)Enum.Parse(typeof(Letters), input.ToUpper().Substring(0, 1));
+                var number = int.Parse(input.Substring(1, 1));
+                return new Position(letter, number);
+
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private static Position GetRandomPosition()
